@@ -1,4 +1,13 @@
+using ClotheoAPI.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+var connectionString = builder.Configuration.GetConnectionString("ClotheoDbContext");
+builder.Services.AddDbContext<ClotheoDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString(connectionString)));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
