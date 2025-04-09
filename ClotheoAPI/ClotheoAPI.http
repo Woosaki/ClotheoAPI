@@ -1,0 +1,6 @@
+@ClotheoAPI_HostAddress = http://localhost:5171
+
+GET {{ClotheoAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
