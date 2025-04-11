@@ -37,6 +37,12 @@ public class UserRepository(ClotheoDbContext dbContext) : IUserRepository
         await dbContext.SaveChangesAsync();
     }
 
+    public async Task UpdateAsync(User user)
+    {
+        dbContext.User.Update(user);
+        await dbContext.SaveChangesAsync();
+    }
+
     public async Task DeleteAsync(User user)
     {
         dbContext.User.Remove(user);
