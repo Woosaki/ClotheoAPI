@@ -18,6 +18,14 @@ public class CategoryRepository(ClotheoDbContext dbContext) : ICategoryRepositor
 
         return category;
     }
+
+    public async Task<Category?> GetByNameAsync(string name)
+    {
+        var category = await dbContext.Category.FirstOrDefaultAsync(x => x.Name == name);
+
+        return category;
+    }
+
     public async Task AddAsync(Category category)
     {
         await dbContext.Category.AddAsync(category);
