@@ -1,5 +1,4 @@
 ﻿using ClotheoAPI.Application.Users.Commands.DeleteUser;
-using ClotheoAPI.Application.Users.Commands.RegisterUser;
 using ClotheoAPI.Application.Users.Commands.UpdateUser;
 using ClotheoAPI.Application.Users.Queries.GetAllUsers;
 using ClotheoAPI.Application.Users.Queries.GetUserById;

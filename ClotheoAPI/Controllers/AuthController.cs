@@ -1,4 +1,4 @@
-﻿using ClotheoAPI.Application.Users.Commands.RegisterUser;
+﻿using ClotheoAPI.Application.Auth.Commands.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,15 +16,15 @@ public class AuthController(IMediator mediator) : ControllerBase
         return CreatedAtAction(nameof(CategoryController.GetById), new { id = userId }, null);
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginUserCommand command)
-    {
-        // ... logika logowania ...
-    }
+    //[HttpPost("login")]
+    //public async Task<IActionResult> Login(LoginUserCommand command)
+    //{
+    //    // ... logika logowania ...
+    //}
 
-    [HttpPost("logout")]
-    public async Task<IActionResult> Logout()
-    {
-        // ... logika wylogowania ...
-    }
+    //[HttpPost("logout")]
+    //public async Task<IActionResult> Logout()
+    //{
+    //    // ... logika wylogowania ...
+    //}
 }
