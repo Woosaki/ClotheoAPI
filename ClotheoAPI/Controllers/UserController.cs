@@ -3,10 +3,12 @@ using ClotheoAPI.Application.Users.Commands.UpdateUser;
 using ClotheoAPI.Application.Users.Queries.GetAllUsers;
 using ClotheoAPI.Application.Users.Queries.GetUserById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClotheoAPI.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class UserController(IMediator mediator) : ControllerBase

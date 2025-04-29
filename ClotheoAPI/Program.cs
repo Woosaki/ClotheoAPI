@@ -1,4 +1,5 @@
 using ClotheoAPI.Application;
+using ClotheoAPI.Application.Auth.Settings;
 using ClotheoAPI.Infrastructure;
 using ClotheoAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +15,10 @@ builder.Services.AddInfrastructureLayer(builder.Configuration);
 
 builder.Services.AddHealthChecks().AddDbContextCheck<ClotheoDbContext>();
 
+var jwtSettings = new JwtSettings();
+builder.Configuration.Bind("Jwt", jwtSettings);
+builder.Services.AddSingleton(jwtSettings);
+
 builder.Services.AddAuthentication(o =>
 {
     o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -27,9 +32,9 @@ builder.Services.AddAuthentication(o =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+        ValidIssuer = jwtSettings.Issuer,
+        ValidAudience = jwtSettings.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
     };
 });
 
@@ -68,7 +73,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
+var logger = app.Services.GetRequiredService<ILogger<DatabaseInitializer>>();
 await DatabaseInitializer.InitializeAsync(app.Services, logger);
 
 if (app.Environment.IsDevelopment())

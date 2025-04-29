@@ -21,9 +21,7 @@ public class RegisterUserCommandHandler(IUserRepository userRepository)
             Username = request.Username,
             Email = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
-            ProfilePicture = request.ProfilePicture,
-            IsAdmin = false,
-            RegistrationDate = DateTime.UtcNow
+            ProfilePicture = request.ProfilePicture
         };
 
         await userRepository.AddAsync(newUser);
