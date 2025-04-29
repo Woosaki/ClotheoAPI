@@ -1,6 +1,69 @@
-@ClotheoAPI_HostAddress = http://localhost:5171
+﻿@ClotheoAPI.Presentation_HostAddress = https://localhost:7089
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3NDU5NDcxNjMsImV4cCI6MTc0NTk1MDc2MywiaWF0IjoxNzQ1OTQ3MTYzLCJpc3MiOiJDbG90aGVvQVBJIiwiYXVkIjoiQ2xvdGhlb0Zyb250ZW5kIn0.DwFU2xMiqfhhQQpk15ufx7HYPmpMrtdj5phSb1x2S5w
 
-GET {{ClotheoAPI_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{ClotheoAPI.Presentation_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin"
+}
+
+###
+
+POST {{ClotheoAPI.Presentation_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "string",
+  "email": "string",
+  "password": "string",
+  "profilePicture": "string"
+}
+
+###
+
+GET {{ClotheoAPI.Presentation_HostAddress}}/api/category
+
+###
+
+POST {{ClotheoAPI.Presentation_HostAddress}}/api/category
+Content-Type: application/json
+
+{
+  "name": "string"
+}
+
+###
+
+@id = 100
+DELETE {{ClotheoAPI.Presentation_HostAddress}}/api/category/{{id}}
+
+###
+
+GET {{ClotheoAPI.Presentation_HostAddress}}/api/category/{{id}}
+
+###
+
+GET {{ClotheoAPI.Presentation_HostAddress}}/api/user
+
+###
+
+DELETE {{ClotheoAPI.Presentation_HostAddress}}/api/user/{{id}}
+
+###
+
+GET {{ClotheoAPI.Presentation_HostAddress}}/api/user/{{id}}
+
+###
+
+PUT {{ClotheoAPI.Presentation_HostAddress}}/api/user/{{id}}
+Content-Type: application/json
+
+{
+  "username": "string",
+  "password": "string",
+  "profilePicture": "string"
+}
 
 ###
