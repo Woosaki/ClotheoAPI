@@ -2,6 +2,7 @@ using ClotheoAPI.Application;
 using ClotheoAPI.Application.Auth.Settings;
 using ClotheoAPI.Infrastructure;
 using ClotheoAPI.Infrastructure.Data;
+using ClotheoAPI.Presentation.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -15,6 +16,8 @@ builder.Services.AddInfrastructureLayer(builder.Configuration);
 
 builder.Services.AddHealthChecks().AddDbContextCheck<ClotheoDbContext>();
 
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
 var jwtSettings = new JwtSettings();
 builder.Configuration.Bind("Jwt", jwtSettings);
 builder.Services.AddSingleton(jwtSettings);
@@ -26,6 +29,7 @@ builder.Services.AddAuthentication(o =>
     o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(o =>
 {
+    o.RequireHttpsMetadata = false;
     o.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -37,7 +41,6 @@ builder.Services.AddAuthentication(o =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
     };
 });
-
 
 builder.Services.AddAuthorization();
 
@@ -81,6 +84,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.MapHealthChecks("/health");
 
