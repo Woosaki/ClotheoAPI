@@ -1,11 +1,12 @@
-using ClotheoAPI.Domain.Entities;
+﻿using ClotheoAPI.Domain.Entities;
 using ClotheoAPI.Domain.Exceptions;
 using ClotheoAPI.Domain.Repositories;
 using MediatR;
 
-namespace ClotheoAPI.Application.Users.Commands.RegisterUser;
+namespace ClotheoAPI.Application.Auth.Commands.RegisterUser;
 
-public class RegisterUserCommandHandler(IUserRepository userRepository) : IRequestHandler<RegisterUserCommand, int>
+public class RegisterUserCommandHandler(IUserRepository userRepository)
+    : IRequestHandler<RegisterUserCommand, int>
 {
     public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {

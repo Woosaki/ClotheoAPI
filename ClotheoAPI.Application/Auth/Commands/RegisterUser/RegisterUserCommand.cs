@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ClotheoAPI.Application.Users.Commands.RegisterUser;
+namespace ClotheoAPI.Application.Auth.Commands.RegisterUser;
 
 public class RegisterUserCommand : IRequest<int>
 {

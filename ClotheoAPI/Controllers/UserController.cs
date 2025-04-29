@@ -28,14 +28,6 @@ public class UserController(IMediator mediator) : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterUserCommand command)
-    {
-        var userId = await mediator.Send(command);
-
-        return CreatedAtAction(nameof(Get), new { id = userId }, null);
-    }
-
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UpdateUserCommand command)
     {
