@@ -1,5 +1,6 @@
 ﻿@ClotheoAPI.Presentation_HostAddress = https://localhost:7089
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3NDU5NDcxNjMsImV4cCI6MTc0NTk1MDc2MywiaWF0IjoxNzQ1OTQ3MTYzLCJpc3MiOiJDbG90aGVvQVBJIiwiYXVkIjoiQ2xvdGhlb0Zyb250ZW5kIn0.DwFU2xMiqfhhQQpk15ufx7HYPmpMrtdj5phSb1x2S5w
+@tokenAdmin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3NDU5NTA3NTUsImV4cCI6MTc0NTk1NDM1NSwiaWF0IjoxNzQ1OTUwNzU1LCJpc3MiOiJDbG90aGVvQVBJIiwiYXVkIjoiQ2xvdGhlb0Zyb250ZW5kIn0.W0I57kIt6xoQER5QDUGsB5DIfn3r6wGlANF1rCidy90
+@tokenUser = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiJ1c2VyIiwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3NDU5NDk0MTcsImV4cCI6MTc0NTk1MzAxNywiaWF0IjoxNzQ1OTQ5NDE3LCJpc3MiOiJDbG90aGVvQVBJIiwiYXVkIjoiQ2xvdGhlb0Zyb250ZW5kIn0.pu7UEEqKNLjXw4A4juOJzM4dqzuNhO9QCQathxIu5Fc
 
 POST {{ClotheoAPI.Presentation_HostAddress}}/api/auth/login
 Content-Type: application/json
@@ -11,14 +12,24 @@ Content-Type: application/json
 
 ###
 
+POST {{ClotheoAPI.Presentation_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "user"
+}
+
+###
+
 POST {{ClotheoAPI.Presentation_HostAddress}}/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "string",
-  "email": "string",
-  "password": "string",
-  "profilePicture": "string"
+  "username": "user",
+  "email": "user@example.com",
+  "password": "user",
+  "profilePicture": ""
 }
 
 ###
@@ -29,15 +40,17 @@ GET {{ClotheoAPI.Presentation_HostAddress}}/api/category
 
 POST {{ClotheoAPI.Presentation_HostAddress}}/api/category
 Content-Type: application/json
+Authorization: Bearer {{tokenAdmin}}
 
 {
-  "name": "string"
+  "name": "koZ"
 }
 
 ###
 
 @id = 100
 DELETE {{ClotheoAPI.Presentation_HostAddress}}/api/category/{{id}}
+Authorization: Bearer {{tokenAdmin}}
 
 ###
 
@@ -46,6 +59,7 @@ GET {{ClotheoAPI.Presentation_HostAddress}}/api/category/{{id}}
 ###
 
 GET {{ClotheoAPI.Presentation_HostAddress}}/api/user
+Authorization: Bearer {{token}}
 
 ###
 

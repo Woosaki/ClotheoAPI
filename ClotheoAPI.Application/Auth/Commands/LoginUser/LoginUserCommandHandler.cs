@@ -19,7 +19,7 @@ public class LoginUserCommandHandler(IUserRepository userRepository, JwtSettings
 
         if (user is null || !isPasswordValid)
         {
-            throw new UnauthorizedException("Wrong login credentials");
+            throw new BadRequestException("Wrong login credentials");
         }
 
         var tokenHandler = new JwtSecurityTokenHandler();
