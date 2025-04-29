@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClotheoAPI.Presentation.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class CategoryController(IMediator mediator) : ControllerBase
 {
     [HttpGet]

@@ -31,6 +31,7 @@ public static class DatabaseInitializer
         else
         {
             logger.LogError("Database connection failed.");
+            throw new Exception("Database connection failed.");
         }
     }
 }
