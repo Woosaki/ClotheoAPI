@@ -2,6 +2,7 @@
 using ClotheoAPI.Application.Users.Commands.UpdateUser;
 using ClotheoAPI.Application.Users.Queries.GetAllUsers;
 using ClotheoAPI.Application.Users.Queries.GetUserById;
+using ClotheoAPI.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace ClotheoAPI.Presentation.Controllers;
 public class UserController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<ActionResult<IEnumerable<User>>> Get()
     {
         var users = await mediator.Send(new GetAllUsersQuery());
 
@@ -22,7 +23,7 @@ public class UserController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<ActionResult<User>> GetById(int id)
     {
         var user = await mediator.Send(new GetUserByIdQuery(id));
 

@@ -14,20 +14,14 @@ public class AuthController(IMediator mediator) : ControllerBase
     {
         var userId = await mediator.Send(command);
 
-        return CreatedAtAction(nameof(CategoryController.GetById), new { id = userId }, null);
+        return CreatedAtAction(nameof(UserController.GetById), new { id = userId }, null);
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginUserCommand command)
+    public async Task<ActionResult<string>> Login(LoginUserCommand command)
     {
         var token = await mediator.Send(command);
 
         return Ok(token);
     }
-
-    //[HttpPost("logout")]
-    //public async Task<IActionResult> Logout()
-    //{
-    //    // ... logika wylogowania ...
-    //}
 }
