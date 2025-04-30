@@ -1,3 +1,4 @@
+using ClotheoAPI.Application.Auth.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ClotheoAPI.Application;
@@ -9,5 +10,8 @@ public static class ServiceCollectionExtensions
         var assembly = typeof(ServiceCollectionExtensions).Assembly;
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+
+        services.AddScoped<IUserContext, UserContext>();
+        services.AddHttpContextAccessor();
     }
 }
