@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClotheoAPI.Presentation", "ClotheoAPI\ClotheoAPI.Presentation.csproj", "{082CDBC2-1188-4361-8FF9-45611950F80A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClotheoAPI.Presentation", "src\ClotheoAPI.Presentation\ClotheoAPI.Presentation.csproj", "{082CDBC2-1188-4361-8FF9-45611950F80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Domain", "ClotheoAPI.Domain\ClotheoAPI.Domain.csproj", "{E5939075-E284-48CB-AA86-44B2552B5B0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Domain", "src\ClotheoAPI.Domain\ClotheoAPI.Domain.csproj", "{E5939075-E284-48CB-AA86-44B2552B5B0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Infrastructure", "ClotheoAPI.Infrastructure\ClotheoAPI.Infrastructure.csproj", "{81FA0E40-28E2-450B-B28E-E4C7DDDF9860}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Infrastructure", "src\ClotheoAPI.Infrastructure\ClotheoAPI.Infrastructure.csproj", "{81FA0E40-28E2-450B-B28E-E4C7DDDF9860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Application", "ClotheoAPI.Application\ClotheoAPI.Application.csproj", "{EEEFBEB9-B15E-4AF0-AB0F-80F853CEBB78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Application", "src\ClotheoAPI.Application\ClotheoAPI.Application.csproj", "{EEEFBEB9-B15E-4AF0-AB0F-80F853CEBB78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
