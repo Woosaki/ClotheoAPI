@@ -6,6 +6,6 @@ namespace ClotheoAPI.Domain.Exceptions;
 /// <param name="resourceName">The name of the not found resource.</param>
 /// <param name="id">The identifier of the not found resource.</param>
 public class NotFoundException(string resourceName, object id)
-    : Exception($"{resourceName} with ID {id} was not found.")
+    : Exception($"{resourceName} with ID '{id}' was not found.")
 {
 }

@@ -14,12 +14,12 @@ public class LoginUserCommandHandler(IUserRepository userRepository, JwtSettings
 {
     public async Task<string> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByEmailAsync(request.Email);
-        var isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user?.PasswordHash);
+        var user = await userRepository.GetByEmailAsync(request.Email)
+            ?? throw new BadRequestException($"User with email '{request.Email}' not found.");
 
-        if (user is null || !isPasswordValid)
+        if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
         {
-            throw new BadRequestException("Wrong login credentials");
+            throw new BadRequestException("Invalid password.");
         }
 
         var tokenHandler = new JwtSecurityTokenHandler();
