@@ -16,7 +16,7 @@ public class AuthController(IMediator mediator) : ControllerBase
     {
         var userId = await mediator.Send(command);
 
-        return CreatedAtAction(nameof(UserController.GetById), new { id = userId }, null);
+        return CreatedAtAction(nameof(UserController.GetById), new { controller = "user", id = userId }, null);
     }
 
     [HttpPost("login")]
