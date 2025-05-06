@@ -5,7 +5,7 @@ using MediatR;
 
 namespace ClotheoAPI.Application.Categories.Commands.AddCategory;
 
-public class AddcCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<AddCategoryCommand, int>
+public class AddCategoryCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<AddCategoryCommand, int>
 {
     public async Task<int> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
     {
@@ -14,7 +14,7 @@ public class AddcCommandHandler(ICategoryRepository categoryRepository) : IReque
         var existingCategory = await categoryRepository.GetByNameAsync(formattedName);
         if (existingCategory != null)
         {
-            throw new BadRequestException($"Category {formattedName} already exists.");
+            throw new BadRequestException($"Category '{formattedName}' already exists.");
         }
 
         var newCategory = new Category { Name = formattedName };
