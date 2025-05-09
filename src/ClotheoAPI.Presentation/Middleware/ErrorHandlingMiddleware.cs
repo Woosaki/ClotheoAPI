@@ -1,4 +1,5 @@
 ﻿
+using ClotheoAPI.Domain.Common;
 using ClotheoAPI.Domain.Exceptions;
 using System.Net;
 
@@ -31,19 +32,19 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
             case BadRequestException:
                 statusCode = HttpStatusCode.BadRequest;
                 break;
+            case UnauthorizedException:
+                statusCode = HttpStatusCode.Unauthorized;
+                break;
+            case ForbiddenException:
+                statusCode = HttpStatusCode.Forbidden;
+                break;
             default:
                 message = "An unexpected error occurred.";
                 break;
         }
 
-        context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)statusCode;
-
-        var errorResponse = new
-        {
-            context.Response.StatusCode,
-            Message = message
-        };
+        var errorResponse = new ErrorResponse(context.Response.StatusCode, message);
 
         logger.LogError(ex, message);
         await context.Response.WriteAsJsonAsync(errorResponse);

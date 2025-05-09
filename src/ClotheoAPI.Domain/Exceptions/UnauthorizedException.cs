@@ -4,13 +4,7 @@
 /// Exception thrown when the client is not authenticated.
 /// </summary>
 /// <param name="message">A message describing the authorization failure (optional).</param>
-public class UnauthorizedException : Exception
+public class UnauthorizedException(string message = "You must be authenticated to access this resource.")
+    : Exception(message)
 {
-    public UnauthorizedException()
-    {
-    }
-
-    public UnauthorizedException(string message) : base(message)
-    {
-    }
 }
