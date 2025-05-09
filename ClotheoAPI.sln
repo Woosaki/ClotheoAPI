@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Domain", "src\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Application.Tests", "tests\ClotheoAPI.Application.Tests\ClotheoAPI.Application.Tests.csproj", "{1AA13398-50C8-5620-F0AA-02C57AAFA406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClotheoAPI.Presentation.Tests", "src\ClotheoAPI.Presentation.Tests\ClotheoAPI.Presentation.Tests.csproj", "{4DAD2A5C-C393-4432-AD3B-ED5C8E5BFC4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{1AA13398-50C8-5620-F0AA-02C57AAFA406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AA13398-50C8-5620-F0AA-02C57AAFA406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AA13398-50C8-5620-F0AA-02C57AAFA406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DAD2A5C-C393-4432-AD3B-ED5C8E5BFC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DAD2A5C-C393-4432-AD3B-ED5C8E5BFC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DAD2A5C-C393-4432-AD3B-ED5C8E5BFC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DAD2A5C-C393-4432-AD3B-ED5C8E5BFC4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
