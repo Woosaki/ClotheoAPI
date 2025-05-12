@@ -1,4 +1,5 @@
-﻿using ClotheoAPI.Application.Auth.Commands.RegisterUser;
+﻿using ClotheoAPI.Application.Auth.Commands.LoginUser;
+using ClotheoAPI.Application.Auth.Commands.RegisterUser;
 using ClotheoAPI.Domain.Common;
 using ClotheoAPI.Domain.Entities;
 using ClotheoAPI.Infrastructure.Data;
@@ -93,5 +94,72 @@ public class AuthControllerTests(CustomWebApplicationFactory factory)
 
         var notRegisteredUser = await GetUserAsync(u => u.Username == command.Username && u.Email == command.Email);
         notRegisteredUser.Should().BeNull();
+    }
+
+    [Fact]
+    public async Task Login_ValidCredentials_Returns200OK_WithJwtToken()
+    {
+        var command = new LoginUserCommand
+        {
+            Email = "existing@email.com",
+            Password = "Password123!"
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", command);
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        var token = await response.Content.ReadAsStringAsync();
+        token.Should().NotBeNullOrEmpty();
+    }
+
+    [Fact]
+    public async Task Login_InvalidEmail_Returns400BadRequest_WithErrorMessage()
+    {
+        var command = new LoginUserCommand
+        {
+            Email = "nonexistent@example.com",
+            Password = "Password123!"
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", command);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+        errorResponse.Should().NotBeNull();
+        errorResponse.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
+        errorResponse.Message.Should().NotBeNullOrEmpty();
+    }
+
+    [Fact]
+    public async Task Login_InvalidPassword_Returns400BadRequest_WithErrorMessage()
+    {
+        var command = new LoginUserCommand
+        {
+            Email = "existing@email.com",
+            Password = "Wr0ngPassword!"
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", command);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+        errorResponse.Should().NotBeNull();
+        errorResponse.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
+        errorResponse.Message.Should().NotBeNullOrEmpty();
+    }
+
+    [Fact]
+    public async Task Login_InvalidInput_Returns400BadRequest_WithValidationErrors()
+    {
+        var command = new LoginUserCommand
+        {
+            Email = "",
+            Password = ""
+        };
+        var response = await _client.PostAsJsonAsync("/api/auth/login", command);
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        var problemDetails = await response.Content.ReadFromJsonAsync<ValidationProblemDetails>();
+        problemDetails.Should().NotBeNull();
+        problemDetails.Status.Should().Be((int)HttpStatusCode.BadRequest);
+        problemDetails.Title.Should().Be("One or more validation errors occurred.");
+        problemDetails.Errors.Should().ContainKeys("Email", "Password");
     }
 }
