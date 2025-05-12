@@ -4,5 +4,5 @@ namespace ClotheoAPI.Application.Categories.Commands.AddCategory;
 
 public class AddCategoryCommand : IRequest<int>
 {
-    public required string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

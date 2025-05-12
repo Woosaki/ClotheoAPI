@@ -54,6 +54,8 @@ public class AddCategoryCommandHandlerTests
 
         await act.Should().ThrowAsync<BadRequestException>()
             .WithMessage($"Category '{existingCategory.Name}' already exists.");
+        _categoryRepositoryMock.Verify(repo => repo.GetByNameAsync(existingCategory.Name), Times.Once);
+        _categoryRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Category>()), Times.Never);
     }
 
     [Theory]
