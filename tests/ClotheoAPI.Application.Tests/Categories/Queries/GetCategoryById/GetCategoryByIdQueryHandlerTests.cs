@@ -47,7 +47,7 @@ public class GetCategoryByIdQueryHandlerTests
 
         await act.Should()
             .ThrowAsync<NotFoundException>()
-            .WithMessage($"User with ID '{query.Id}' was not found.");
+            .WithMessage($"Category with ID '{query.Id}' was not found.");
         _categoryRepositoryMock.Verify(repo => repo.GetByIdAsync(query.Id), Times.Once);
     }
 }

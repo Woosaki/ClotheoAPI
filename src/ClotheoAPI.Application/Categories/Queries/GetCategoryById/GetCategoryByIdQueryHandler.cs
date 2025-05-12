@@ -10,7 +10,7 @@ public class GetCategoryByIdQueryHandler(ICategoryRepository categoryRepository)
     public async Task<Category> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
     {
         var category = await categoryRepository.GetByIdAsync(request.Id)
-            ?? throw new NotFoundException(nameof(User), request.Id);
+            ?? throw new NotFoundException(nameof(Category), request.Id);
 
         return category;
     }
