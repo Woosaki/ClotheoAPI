@@ -1,4 +1,5 @@
-﻿using ClotheoAPI.Infrastructure.Data;
+﻿using ClotheoAPI.Domain.Entities;
+using ClotheoAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,13 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>, IAsyn
             var db = scopedServices.GetRequiredService<ClotheoDbContext>();
             db.Database.Migrate();
 
+            db.User.Add(new User
+            {
+                Username = "existinguser",
+                Email = "existing@email.com",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("Password123!"),
+            });
+            db.SaveChanges();
         });
     }
 
