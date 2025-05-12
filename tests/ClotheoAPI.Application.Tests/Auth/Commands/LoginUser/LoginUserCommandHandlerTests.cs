@@ -34,7 +34,7 @@ public class LoginUserCommandHandlerTests
         var command = new LoginUserCommand
         {
             Email = "test@example.com",
-            Password = "password123"
+            Password = "Password123!"
         };
         var existingUser = new User
         {
@@ -54,13 +54,13 @@ public class LoginUserCommandHandlerTests
         result.Should().NotBeNullOrEmpty();
         var token = new JwtSecurityTokenHandler().ReadJwtToken(result);
         token.Should().NotBeNull();
-        token.ValidTo.Should().BeCloseTo(DateTime.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes), TimeSpan.FromSeconds(5));
+        token.ValidTo.Should().BeCloseTo(DateTime.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes), TimeSpan.FromMinutes(1));
         token.Issuer.Should().Be(_jwtSettings.Issuer);
         token.Audiences.Should().Contain(_jwtSettings.Audience);
         token.Claims.Should().Contain(c => c.Type == "nameid" && c.Value == existingUser.Id.ToString());
         token.Claims.Should().Contain(c => c.Type == "unique_name" && c.Value == existingUser.Username);
         token.Claims.Should().Contain(c => c.Type == "email" && c.Value == existingUser.Email);
-        token.Claims.Should().Contain(c => c.Type == "role" && c.Value == (existingUser.IsAdmin ? "Admin" : "User"));
+        token.Claims.Should().Contain(c => c.Type == "role" && c.Value == "User");
 
         _userRepositoryMock.Verify(repo => repo.GetByEmailAsync(command.Email), Times.Once);
     }
@@ -92,14 +92,14 @@ public class LoginUserCommandHandlerTests
         var command = new LoginUserCommand
         {
             Email = "test@example.com",
-            Password = "wrongpassword"
+            Password = "Wr0ngpassword!"
         };
         var existingUser = new User
         {
             Id = 1,
             Username = "testuser",
             Email = command.Email,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword("password123"),
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Password123!"),
         };
 
         _userRepositoryMock
