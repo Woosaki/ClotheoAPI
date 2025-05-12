@@ -25,7 +25,7 @@ public class RegisterUserCommandHandlerTests
         {
             Username = "newuser",
             Email = "newuser@example.com",
-            Password = "password123",
+            Password = "Password123!",
             ProfilePicture = "profile.jpg"
         };
         var newUser = new User
@@ -65,9 +65,7 @@ public class RegisterUserCommandHandlerTests
     {
         var command = new RegisterUserCommand
         {
-            Username = "testUser",
-            Email = "test@example.com",
-            Password = ""
+            Username = "existingUsername"
         };
         var existingUser = new User
         {
@@ -94,9 +92,7 @@ public class RegisterUserCommandHandlerTests
     {
         var command = new RegisterUserCommand
         {
-            Username = "Test",
-            Email = "test@example.com",
-            Password = ""
+            Email = "existing@email.com"
         };
         var existingUser = new User
         {
